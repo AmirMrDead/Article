@@ -12,12 +12,12 @@ import java.sql.SQLException;
 
 public class UserService {
 
-    private UserRepository userRepository = new UserRepository();
-    private ArticleRepository articleRepository = new ArticleRepository();
+    private final UserRepository userRepository = new UserRepository();
+    private final ArticleRepository articleRepository = new ArticleRepository();
 
     public void save(User user) throws SQLException {
         ResultSet resultSet = userRepository.load(user);
-        if(!resultSet.next()){
+        if (!resultSet.next()) {
             userRepository.save(user);
         }
     }
@@ -74,5 +74,13 @@ public class UserService {
             }
         }
         resultSet.close();
+    }
+
+    public void addArticle(Article article, User user) throws SQLException {
+        articleRepository.save(article, user.getId());
+    }
+
+    public void changePassword(User user, String password) throws SQLException {
+        userRepository.changePassword(user, password);
     }
 }
