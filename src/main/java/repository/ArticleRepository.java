@@ -28,7 +28,8 @@ public class ArticleRepository {
 
     public ResultSet load() throws SQLException {
         final String query = """
-                select * from article;            
+                select * from article
+                where is_published = true;         
                 """;
         Statement statement = DBConfig.getConnection().createStatement();
         return statement.executeQuery(query);
