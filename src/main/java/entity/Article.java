@@ -67,4 +67,10 @@ public class Article {
     public void setBrief(String brief) {
         this.brief = brief;
     }
+
+    @Override
+    public String toString(){
+        return "id: " + id + " title: " + title + " brief: " + brief + " content: "
+                + content + " createDate: " + createDate + " isPublished: " + isPublished + " userId: " + userId;
+    }
 }
