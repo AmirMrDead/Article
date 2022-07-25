@@ -11,7 +11,7 @@ public class DBConfig {
     static {
         try {
             connection = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/","postgres","@MIRr@9137#!");
+                    .getConnection("jdbc:postgresql://localhost:5432/article","postgres","@MIRr@9137#!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
