@@ -19,7 +19,7 @@ public class UserRepository {
         preparedStatement.setString(1,user.getUsername());
         preparedStatement.setString(2,user.getNationalCode());
         preparedStatement.setDate(3,user.getBirthday());
-        preparedStatement.setString(4,user.getPassword());
+        preparedStatement.setString(4,user.getNationalCode());
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }
@@ -31,14 +31,8 @@ public class UserRepository {
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
         preparedStatement.setString(1,user.getNationalCode());
         preparedStatement.setString(2,user.getPassword());
-        preparedStatement.close();
         return preparedStatement.executeQuery();
-       /* if(resultSet.next()){
-            System.out.println("Login done");
-            System.out.println("Press enter to continue");
-            try{System.in.read();}
-            catch(Exception ignored){}
-        }*/
+
     }
 
 }
