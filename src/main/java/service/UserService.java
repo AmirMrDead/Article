@@ -6,6 +6,7 @@ import entity.User;
 import repository.ArticleRepository;
 import repository.UserRepository;
 
+import javax.xml.transform.Result;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -82,5 +83,25 @@ public class UserService {
 
     public void changePassword(User user, String password) throws SQLException {
         userRepository.changePassword(user, password);
+    }
+
+    public Article[] loadAllArticles() throws SQLException {
+        ResultSet resultSet = articleRepository.load();
+        Article article = new Article();
+        Article[] articles = new Article[1000];
+        int index = 0;
+        while(resultSet.next()){
+            article.setId(resultSet.getInt("id"));
+            article.setTitle(resultSet.getString("title"));
+            article.setBrief(resultSet.getString("brief"));
+            article.setContent(resultSet.getString("content"));
+            article.setCreateDate(resultSet.getDate("create_date"));
+            article.setIsPublished(resultSet.getBoolean("is_published"));
+            article.setUserId(resultSet.getInt("user_id"));
+            articles[index] = article;
+            index++;
+        }
+        resultSet.close();
+        return articles;
     }
 }
