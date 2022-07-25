@@ -1,7 +1,5 @@
 package entity;
 
-import list.ArticleList;
-
 import java.sql.Date;
 
 public class User {
@@ -11,7 +9,6 @@ public class User {
     private String nationalCode;
     private Date birthday;
     private String password;
-    private ArticleList articles;
 
     public int getId() {
         return id;
@@ -41,8 +38,8 @@ public class User {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setBirthday(String birthday) {
+        this.birthday = Date.valueOf(birthday);
     }
 
     public String getPassword() {
@@ -53,11 +50,5 @@ public class User {
         this.password = password;
     }
 
-    public ArticleList getArticles() {
-        return articles;
-    }
 
-    public void setArticles(ArticleList articles) {
-        this.articles = articles;
-    }
 }

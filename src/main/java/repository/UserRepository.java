@@ -3,14 +3,12 @@ package repository;
 import config.DBConfig;
 import entity.User;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserRepository {
 
-
     public void save(User user) throws SQLException {
+
         final String query = """ 
                 insert into users(username, national_code, birthday, password) 
                 values (?,?,?,?);
@@ -26,7 +24,7 @@ public class UserRepository {
 
     public ResultSet load(User user) throws SQLException {
         final String query = """
-                select * from users where  national_code = ? and password = ?;
+                select * from users where national_code = ? and password = ?;
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
         preparedStatement.setString(1, user.getNationalCode());
