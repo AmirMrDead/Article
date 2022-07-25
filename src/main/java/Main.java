@@ -39,27 +39,28 @@ public class Main {
     public static void showAll() throws SQLException {
         Article[] articles = new Article[1000];
         articles = Arrays.copyOf(userService.loadAllArticles(), 1000);
-        System.out.println(Arrays.toString(articles));
+        for (int i = 0; i < articles.length; i++) {
+            if (articles[i] != null)
+                System.out.println(articles[i]);
+            else break;
+        }
     }
 
     public static void main(String[] args) throws SQLException {
         String command;
-        while(true){
+        while (true) {
             System.out.println("1) Sign up");
             System.out.println("2) Login");
             System.out.println("3) Show All articles that have been published");
             System.out.println("4) Exit");
             command = scanner.next();
-            if(Objects.equals(command, "1")){
+            if (Objects.equals(command, "1")) {
                 signUp();
-            }
-            else if(Objects.equals(command, "2")){
+            } else if (Objects.equals(command, "2")) {
                 login();
-            }
-            else if(Objects.equals(command, "3")){
+            } else if (Objects.equals(command, "3")) {
                 showAll();
-            }
-            else if(Objects.equals(command, "4")){
+            } else if (Objects.equals(command, "4")) {
                 break;
             }
         }

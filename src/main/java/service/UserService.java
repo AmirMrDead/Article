@@ -87,10 +87,10 @@ public class UserService {
 
     public Article[] loadAllArticles() throws SQLException {
         ResultSet resultSet = articleRepository.load();
-        Article article = new Article();
         Article[] articles = new Article[1000];
         int index = 0;
         while(resultSet.next()){
+            Article article = new Article();
             article.setId(resultSet.getInt("id"));
             article.setTitle(resultSet.getString("title"));
             article.setBrief(resultSet.getString("brief"));
