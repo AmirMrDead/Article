@@ -1,8 +1,10 @@
+import entity.Article;
 import entity.User;
 import service.UserService;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -34,8 +36,10 @@ public class Main {
         userService.login(user);
     }
 
-    public static void showAll(){
-
+    public static void showAll() throws SQLException {
+        Article[] articles = new Article[1000];
+        articles = Arrays.copyOf(userService.loadAllArticles(), 1000);
+        System.out.println(Arrays.toString(articles));
     }
 
     public static void main(String[] args) throws SQLException {
@@ -53,7 +57,7 @@ public class Main {
                 login();
             }
             else if(Objects.equals(command, "3")){
-                login();
+                showAll();
             }
             else if(Objects.equals(command, "4")){
                 break;
