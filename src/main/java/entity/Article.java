@@ -6,6 +6,7 @@ public class Article {
 
     private int id;
     private String title;
+    private String brief;
     private String content;
     private Date createDate;
     private boolean isPublished;
@@ -57,5 +58,13 @@ public class Article {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getBrief() {
+        return brief;
+    }
+
+    public void setBrief(String brief) {
+        this.brief = brief;
     }
 }
