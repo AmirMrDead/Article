@@ -135,6 +135,12 @@ public class Main {
         }
     }
 
+    public static void changePassword(User user) throws SQLException {
+        System.out.print("Enter new password: ");
+        String password = scanner.next();
+        userService.changePassword(user,password);
+    }
+
     public static void showMenuForUser(User user) throws SQLException {
         String command;
         while (true) {
@@ -151,7 +157,7 @@ public class Main {
             } else if (Objects.equals(command, "3")) {
                 editArticle(user);
             } else if (Objects.equals(command, "4")) {
-
+                changePassword(user);
             } else if (Objects.equals(command, "5")) {
                 break;
             }

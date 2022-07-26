@@ -42,6 +42,7 @@ public class UserRepository {
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
         preparedStatement.setString(1, password);
         preparedStatement.setInt(2, user.getId());
+        preparedStatement.executeUpdate();
     }
 
 }
