@@ -35,6 +35,11 @@ public class Main {
             showMenuForUser(user);
         } else {
             System.out.println("this user exists. try login or signup with new national code and username");
+            System.out.println("Press enter to continue");
+            try {
+                System.in.read();
+            } catch (Exception ignored) {
+            }
         }
     }
 
@@ -66,26 +71,41 @@ public class Main {
     public static void showAllArticles() throws SQLException {
         Article[] articles;
         articles = Arrays.copyOf(userService.load(), 1000);
-        for (Article article : articles) {
-            if (article != null)
-                System.out.println(article.showSummary());
-            else break;
+        if(articles[0].getId() == 0){
+            System.out.println("We have no published articles");
+            System.out.println("Press enter to continue");
+            try {
+                System.in.read();
+            } catch (Exception ignored) {
+            }
+        }
+        else{
+            for (Article article : articles) {
+                if (article != null)
+                    System.out.println(article.showSummary());
+                else break;
+            }
         }
     }
 
     public static void showAllArticles(User user) throws SQLException {
         Article[] articles;
         articles = Arrays.copyOf(userService.load(user), 1000);
-        for (Article article : articles) {
-            if (article != null)
-                System.out.println(article);
-            else break;
+        if(articles[0].getId() == 0){
+            System.out.println("you have no article");
+            System.out.println("Press enter to continue");
+            try {
+                System.in.read();
+            } catch (Exception ignored) {
+            }
         }
-      /*  System.out.println("Press enter to continue");
-        try {
-            System.in.read();
-        } catch (Exception ignored) {
-        }*/
+        else{
+            for (Article article : articles) {
+                if (article != null)
+                    System.out.println(article);
+                else break;
+            }
+        }
     }
 
     public static void addArticle(User user) throws SQLException {
