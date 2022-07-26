@@ -55,11 +55,11 @@ public class Main {
                 System.out.println(article);
             else break;
         }
-        System.out.println("Press enter to continue");
+      /*  System.out.println("Press enter to continue");
         try {
             System.in.read();
         } catch (Exception ignored) {
-        }
+        }*/
     }
 
     public static void addArticle(User user) throws SQLException {
@@ -80,43 +80,51 @@ public class Main {
 
     public static void editArticle(User user) throws SQLException {
         String command;
-        System.out.println("1) Edit article");
-        System.out.println("2) Published or unpublished article");
-        System.out.println("3) Exit");
         while (true) {
+            System.out.println("1) Edit article");
+            System.out.println("2) Published or unpublished article");
+            System.out.println("3) Exit");
+            System.out.print("Enter your command: ");
             command = scanner.next();
             if (Objects.equals(command, "1")) {
-                showAllArticles(user);
-                System.out.println("These are your articles");
-                System.out.println("Enter the id of the article you want to edit: ");
-                command = scanner.next();
-                int id = Integer.parseInt(command);
-                System.out.println(id);
-                Article article;
-                article = userService.load(Integer.parseInt(command), user);
-                System.out.println(article);
-                System.out.println("this is your article");
-                System.out.println("Which part do you want to change? ");
-                command = scanner.next();
-                if (Objects.equals(command, "title")) {
-                    System.out.print("Enter new title");
-                    scanner.nextLine();
-                    String temp = scanner.nextLine();
-                    article.setTitle(temp);
+                while (true) {
+                    showAllArticles(user);
+                    System.out.println("These are your articles");
+                    System.out.println("Enter the id of the article you want to edit (Enter exit for exit): ");
+                    command = scanner.next();
+                    if(Objects.equals(command, "exit"))
+                        break;
+                    int id = Integer.parseInt(command);
+                    System.out.println(id);
+                    Article article;
+                    article = userService.load(Integer.parseInt(command), user);
                     System.out.println(article);
-                    userService.edit(article, id, user);
-                } else if (Objects.equals(command, "brief")) {
-                    System.out.print("Enter new brief");
-                    article.setBrief(scanner.nextLine());
-                    userService.edit(article, id, user);
-                } else if (Objects.equals(command, "content")) {
-                    System.out.print("Enter new content");
-                    article.setContent(scanner.nextLine());
-                    userService.edit(article, id, user);
-                } else if (Objects.equals(command, "isPublished")) {
-                    System.out.print("Enter new title");
-                    article.setTitle(scanner.nextLine());
-                    userService.edit(article, id, user);
+                    System.out.println("this is your article");
+                    System.out.println("Which part do you want to change? (Enter exit for exit)");
+                    command = scanner.next();
+                    if (Objects.equals(command, "title")) {
+                        System.out.print("Enter new title: ");
+                        scanner.nextLine();
+                        article.setTitle(scanner.nextLine());
+                        userService.edit(article, id, user);
+                    } else if (Objects.equals(command, "brief")) {
+                        System.out.print("Enter new brief: ");
+                        scanner.nextLine();
+                        article.setBrief(scanner.nextLine());
+                        userService.edit(article, id, user);
+                    } else if (Objects.equals(command, "content")) {
+                        System.out.print("Enter new content: ");
+                        scanner.nextLine();
+                        article.setContent(scanner.nextLine());
+                        userService.edit(article, id, user);
+                    } else if (Objects.equals(command, "isPublished")) {
+                        System.out.print("Enter new title");
+                        scanner.nextLine();
+                        article.setTitle(scanner.nextLine());
+                        userService.edit(article, id, user);
+                    } else if (Objects.equals(command, "exit")) {
+                        break;
+                    }
                 }
             } else if (Objects.equals(command, "2")) {
                 addArticle(user);
