@@ -37,11 +37,11 @@ public class Main {
     }
 
     public static void showAll() throws SQLException {
-        Article[] articles = new Article[1000];
+        Article[] articles;
         articles = Arrays.copyOf(userService.loadAllArticles(), 1000);
         for (int i = 0; i < articles.length; i++) {
             if (articles[i] != null)
-                System.out.println(articles[i]);
+                System.out.println(articles[i].showSummary());
             else break;
         }
     }
