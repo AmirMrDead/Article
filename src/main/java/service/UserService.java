@@ -98,13 +98,14 @@ public class UserService {
     }
 
     public void edit(boolean isPublished, int id, User user) throws SQLException {
-        ResultSet resultSet = articleRepository.loadAllArticle(id);
+        /*ResultSet resultSet = articleRepository.loadAllArticle(user.getId());
         if (resultSet.next()) {
             if (resultSet.getInt("user_id") == user.getId()) {
                 articleRepository.edit(isPublished, id);
             }
-        }
-        resultSet.close();
+        }*/
+        articleRepository.edit(isPublished, id);
+        //resultSet.close();
     }
 
     public void edit(Article article, int id, User user) throws SQLException {

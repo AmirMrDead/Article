@@ -93,10 +93,9 @@ public class Main {
                     System.out.println("These are your articles");
                     System.out.println("Enter the id of the article you want to edit (Enter exit for exit): ");
                     command = scanner.next();
-                    if(Objects.equals(command, "exit"))
+                    if (Objects.equals(command, "exit"))
                         break;
                     int id = Integer.parseInt(command);
-                    System.out.println(id);
                     Article article;
                     article = userService.load(Integer.parseInt(command), user);
                     System.out.println(article);
@@ -128,7 +127,18 @@ public class Main {
                     }
                 }
             } else if (Objects.equals(command, "2")) {
-                addArticle(user);
+                showAllArticles(user);
+                System.out.println("These are your articles");
+                System.out.println("Enter the id of the article you want to published or unpublished (Enter exit for exit): ");
+                command = scanner.next();
+                if (Objects.equals(command, "exit"))
+                    break;
+                int id = Integer.parseInt(command);
+                Article article;
+                article = userService.load(Integer.parseInt(command), user);
+                userService.edit(!article.getIsPublished(), id, user);
+                article.setIsPublished(!article.getIsPublished());
+                System.out.println("done! your article is " + article.getIsPublished() + " from now");
             } else if (Objects.equals(command, "3")) {
                 break;
             }
@@ -138,7 +148,7 @@ public class Main {
     public static void changePassword(User user) throws SQLException {
         System.out.print("Enter new password: ");
         String password = scanner.next();
-        userService.changePassword(user,password);
+        userService.changePassword(user, password);
     }
 
     public static void showMenuForUser(User user) throws SQLException {
