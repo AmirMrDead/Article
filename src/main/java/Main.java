@@ -25,6 +25,8 @@ public class Main {
         System.out.print("Enter birthday: ");
         user.setBirthday(scanner.next());
         userService.save(user);
+        if(userService.login(user))
+            showMenuForUser(user);
     }
 
     public static void login() throws SQLException {
