@@ -123,6 +123,12 @@ public class Main {
         article.setUserId(user.getId());
         article.setCreateDate(Date.valueOf(java.time.LocalDate.now()));
         userService.addArticle(article, user);
+        System.out.println("add article done!");
+        System.out.println("Press enter to continue");
+        try {
+            System.in.read();
+        } catch (Exception ignored) {
+        }
     }
 
     public static void editArticle(User user) throws SQLException {
@@ -195,6 +201,12 @@ public class Main {
         System.out.print("Enter new password: ");
         String password = scanner.next();
         userService.changePassword(user, password);
+        System.out.println("change password done!");
+        System.out.println("Press enter to continue");
+        try {
+            System.in.read();
+        } catch (Exception ignored) {
+        }
     }
 
     public static void showMenuForUser(User user) throws SQLException {
