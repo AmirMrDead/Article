@@ -33,6 +33,17 @@ public class UserRepository {
 
     }
 
+    public ResultSet checkUserExist(User user) throws SQLException {
+        final String query = """
+                select * from users where username = ? or national_code = ?;
+                """;
+        PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
+        preparedStatement.setString(1, user.getUsername());
+        preparedStatement.setString(2, user.getNationalCode());
+        return preparedStatement.executeQuery();
+
+    }
+
     public void changePassword(User user, String password) throws SQLException {
         final String query = """
                 update users

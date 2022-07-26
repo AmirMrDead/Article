@@ -24,9 +24,12 @@ public class Main {
         user.setPassword(password);
         System.out.print("Enter birthday: ");
         user.setBirthday(scanner.next());
-        userService.save(user);
-        if(userService.login(user))
+        if (!userService.checkUserExist(user)) {
+            userService.save(user);
             showMenuForUser(user);
+        } else {
+            System.out.println("this user exists. try login or signup with new national code and username");
+        }
     }
 
     public static void login() throws SQLException {

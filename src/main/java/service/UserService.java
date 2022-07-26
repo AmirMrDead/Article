@@ -64,7 +64,7 @@ public class UserService {
         ResultSet resultSet = articleRepository.loadAllArticle();
         Article[] articles = new Article[1000];
         int index = 0;
-        while(resultSet.next()){
+        while (resultSet.next()) {
             Article article = new Article();
             article.setId(resultSet.getInt("id"));
             article.setTitle(resultSet.getString("title"));
@@ -84,7 +84,7 @@ public class UserService {
         ResultSet resultSet = articleRepository.loadOneArticle(id);
         int index = 0;
         Article article = new Article();
-        if(resultSet.next() && user.getId() == resultSet.getInt("user_id")){
+        if (resultSet.next() && user.getId() == resultSet.getInt("user_id")) {
             article.setId(resultSet.getInt("id"));
             article.setTitle(resultSet.getString("title"));
             article.setBrief(resultSet.getString("brief"));
@@ -127,5 +127,9 @@ public class UserService {
         userRepository.changePassword(user, password);
     }
 
+    public boolean checkUserExist(User user) throws SQLException {
+        ResultSet resultSet = userRepository.checkUserExist(user);
+        return resultSet.next();
+    }
 
 }
