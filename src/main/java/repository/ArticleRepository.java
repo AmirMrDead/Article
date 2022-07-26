@@ -38,7 +38,7 @@ public class ArticleRepository {
     public ResultSet load(int id) throws SQLException {
         final String query = """
                 select * from article
-                where id = ?          
+                where user_id = ?          
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
         preparedStatement.setInt(1,id);
