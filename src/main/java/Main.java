@@ -33,6 +33,7 @@ public class Main {
         System.out.print("Enter password: ");
         user.setPassword(scanner.next());
         userService.login(user);
+        showMenuForUser(user);
     }
 
     public static void showAllArticles() throws SQLException {
@@ -55,7 +56,7 @@ public class Main {
         }
     }
 
-    public void showMenuForUser(){
+    public static void showMenuForUser(User user) throws SQLException {
         String command;
         while (true) {
             System.out.println("1) My articles");
@@ -65,7 +66,7 @@ public class Main {
             System.out.println("5) logout");
             command = scanner.next();
             if (Objects.equals(command, "1")) {
-
+                showAllArticles(user);
             } else if (Objects.equals(command, "2")) {
 
             } else if (Objects.equals(command, "3")) {

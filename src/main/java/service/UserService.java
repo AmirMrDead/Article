@@ -23,6 +23,7 @@ public class UserService {
     public void login(User user) throws SQLException {
         ResultSet resultSet = userRepository.load(user);
         if (resultSet.next()) {
+            user.setId(resultSet.getInt("id"));
             System.out.println("Login done");
             System.out.println("Press enter to continue");
             try {
@@ -33,7 +34,7 @@ public class UserService {
     }
 
     public Article[] load(User user) throws SQLException {
-        ResultSet resultSet = articleRepository.load();
+        ResultSet resultSet = articleRepository.load(user.getId());
         Article article = new Article();
         Article[] articles = new Article[1000];
         int index = 0;
