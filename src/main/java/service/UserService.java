@@ -25,12 +25,6 @@ public class UserService {
         ResultSet resultSet = userRepository.load(user);
         if (resultSet.next()) {
             user.setId(resultSet.getInt("id"));
-            System.out.println("Login done");
-            System.out.println("Press enter to continue");
-            try {
-                System.in.read();
-            } catch (Exception ignored) {
-            }
             resultSet.close();
             return true;
         }

@@ -26,6 +26,12 @@ public class Main {
         user.setBirthday(scanner.next());
         if (!userService.checkUserExist(user)) {
             userService.save(user);
+            System.out.println("done successfully");
+            System.out.println("Press enter to continue");
+            try {
+                System.in.read();
+            } catch (Exception ignored) {
+            }
             showMenuForUser(user);
         } else {
             System.out.println("this user exists. try login or signup with new national code and username");
@@ -38,8 +44,23 @@ public class Main {
         user.setUsername(scanner.next());
         System.out.print("Enter password: ");
         user.setPassword(scanner.next());
-        if (userService.login(user))
+        if (userService.login(user)){
+            System.out.println("Login done");
+            System.out.println("Press enter to continue");
+            try {
+                System.in.read();
+            } catch (Exception ignored) {
+            }
             showMenuForUser(user);
+        }
+        else{
+            System.out.println("your username or password is incorrect");
+            System.out.println("Press enter to continue");
+            try {
+                System.in.read();
+            } catch (Exception ignored) {
+            }
+        }
     }
 
     public static void showAllArticles() throws SQLException {
