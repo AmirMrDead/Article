@@ -74,13 +74,15 @@ public class ArticleRepository {
                 set title = ?,
                 brief = ?,
                 content = ?,
-                is_published = ?                            
+                is_published = ?
+                where id = ?                         
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
         preparedStatement.setString(1, article.getTitle());
         preparedStatement.setString(2, article.getBrief());
         preparedStatement.setString(3, article.getContent());
         preparedStatement.setBoolean(4, article.getIsPublished());
+        preparedStatement.setInt(5, id);
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }

@@ -33,7 +33,7 @@ public class Main {
         user.setUsername(scanner.next());
         System.out.print("Enter password: ");
         user.setPassword(scanner.next());
-        if(userService.login(user))
+        if (userService.login(user))
             showMenuForUser(user);
     }
 
@@ -83,14 +83,41 @@ public class Main {
         System.out.println("1) Edit article");
         System.out.println("2) Published or unpublished article");
         System.out.println("3) Exit");
-        command = scanner.next();
-        while(true){
+        while (true) {
+            command = scanner.next();
             if (Objects.equals(command, "1")) {
                 showAllArticles(user);
                 System.out.println("These are your articles");
                 System.out.println("Enter the id of the article you want to edit: ");
                 command = scanner.next();
-                userService.load(user);
+                int id = Integer.parseInt(command);
+                System.out.println(id);
+                Article article;
+                article = userService.load(Integer.parseInt(command), user);
+                System.out.println(article);
+                System.out.println("this is your article");
+                System.out.println("Which part do you want to change? ");
+                command = scanner.next();
+                if (Objects.equals(command, "title")) {
+                    System.out.print("Enter new title");
+                    scanner.nextLine();
+                    String temp = scanner.nextLine();
+                    article.setTitle(temp);
+                    System.out.println(article);
+                    userService.edit(article, id, user);
+                } else if (Objects.equals(command, "brief")) {
+                    System.out.print("Enter new brief");
+                    article.setBrief(scanner.nextLine());
+                    userService.edit(article, id, user);
+                } else if (Objects.equals(command, "content")) {
+                    System.out.print("Enter new content");
+                    article.setContent(scanner.nextLine());
+                    userService.edit(article, id, user);
+                } else if (Objects.equals(command, "isPublished")) {
+                    System.out.print("Enter new title");
+                    article.setTitle(scanner.nextLine());
+                    userService.edit(article, id, user);
+                }
             } else if (Objects.equals(command, "2")) {
                 addArticle(user);
             } else if (Objects.equals(command, "3")) {
