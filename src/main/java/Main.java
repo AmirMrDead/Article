@@ -4,8 +4,6 @@ import service.UserService;
 
 import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
@@ -80,6 +78,27 @@ public class Main {
         userService.addArticle(article, user);
     }
 
+    public static void editArticle(User user) throws SQLException {
+        String command;
+        System.out.println("1) Edit article");
+        System.out.println("2) Published or unpublished article");
+        System.out.println("3) Exit");
+        command = scanner.next();
+        while(true){
+            if (Objects.equals(command, "1")) {
+                showAllArticles(user);
+                System.out.println("These are your articles");
+                System.out.println("Enter the id of the article you want to edit: ");
+                command = scanner.next();
+                userService.load(user);
+            } else if (Objects.equals(command, "2")) {
+                addArticle(user);
+            } else if (Objects.equals(command, "3")) {
+                break;
+            }
+        }
+    }
+
     public static void showMenuForUser(User user) throws SQLException {
         String command;
         while (true) {
@@ -94,9 +113,9 @@ public class Main {
             } else if (Objects.equals(command, "2")) {
                 addArticle(user);
             } else if (Objects.equals(command, "3")) {
-
+                editArticle(user);
             } else if (Objects.equals(command, "4")) {
-                break;
+
             } else if (Objects.equals(command, "5")) {
                 break;
             }

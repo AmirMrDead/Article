@@ -38,7 +38,7 @@ public class UserService {
     }
 
     public Article[] load(User user) throws SQLException {
-        ResultSet resultSet = articleRepository.load(user.getId());
+        ResultSet resultSet = articleRepository.loadAllArticle(user.getId());
         Article[] articles = new Article[1000];
         int index = 0;
         while (resultSet.next()) {
@@ -60,7 +60,27 @@ public class UserService {
     }
 
     public Article[] load() throws SQLException {
-        ResultSet resultSet = articleRepository.load();
+        ResultSet resultSet = articleRepository.loadAllArticle();
+        Article[] articles = new Article[1000];
+        int index = 0;
+        while(resultSet.next()){
+            Article article = new Article();
+            article.setId(resultSet.getInt("id"));
+            article.setTitle(resultSet.getString("title"));
+            article.setBrief(resultSet.getString("brief"));
+            article.setContent(resultSet.getString("content"));
+            article.setCreateDate(resultSet.getDate("create_date"));
+            article.setIsPublished(resultSet.getBoolean("is_published"));
+            article.setUserId(resultSet.getInt("user_id"));
+            articles[index] = article;
+            index++;
+        }
+        resultSet.close();
+        return articles;
+    }
+
+    public Article[] load(int id) throws SQLException {
+        ResultSet resultSet = articleRepository.loadOneArticle(id);
         Article[] articles = new Article[1000];
         int index = 0;
         while(resultSet.next()){
@@ -80,7 +100,7 @@ public class UserService {
     }
 
     public void edit(boolean isPublished, int id, User user) throws SQLException {
-        ResultSet resultSet = articleRepository.load(id);
+        ResultSet resultSet = articleRepository.loadAllArticle(id);
         if (resultSet.next()) {
             if (resultSet.getInt("user_id") == user.getId()) {
                 articleRepository.edit(isPublished, id);
@@ -90,7 +110,7 @@ public class UserService {
     }
 
     public void edit(Article article, int id, User user) throws SQLException {
-        ResultSet resultSet = articleRepository.load(id);
+        ResultSet resultSet = articleRepository.loadAllArticle(id);
         if (resultSet.next()) {
             if (resultSet.getInt("user_id") == user.getId()) {
                 articleRepository.edit(article, id);

@@ -26,7 +26,7 @@ public class ArticleRepository {
         preparedStatement.close();
     }
 
-    public ResultSet load() throws SQLException {
+    public ResultSet loadAllArticle() throws SQLException {
         final String query = """
                 select * from article
                 where is_published = true;         
@@ -35,10 +35,20 @@ public class ArticleRepository {
         return statement.executeQuery(query);
     }
 
-    public ResultSet load(int id) throws SQLException {
+    public ResultSet loadAllArticle(int id) throws SQLException {
         final String query = """
                 select * from article
                 where user_id = ?          
+                """;
+        PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
+        preparedStatement.setInt(1,id);
+        return preparedStatement.executeQuery();
+    }
+
+    public ResultSet loadOneArticle(int id) throws SQLException {
+        final String query = """
+                select * from article
+                where id = ?          
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
         preparedStatement.setInt(1,id);
