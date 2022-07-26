@@ -18,6 +18,7 @@ public class UserService {
         if (!resultSet.next()) {
             userRepository.save(user);
         }
+        resultSet.close();
     }
 
     public boolean login(User user) throws SQLException {

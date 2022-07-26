@@ -65,6 +65,7 @@ public class Main {
     public static void addArticle(User user) throws SQLException {
         Article article = new Article();
         System.out.println("Enter title: ");
+        scanner.nextLine();
         article.setTitle(scanner.nextLine());
         System.out.println("Enter brief: ");
         article.setBrief(scanner.nextLine());
