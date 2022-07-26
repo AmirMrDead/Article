@@ -2,7 +2,10 @@ import entity.Article;
 import entity.User;
 import service.UserService;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
@@ -32,16 +35,16 @@ public class Main {
         user.setUsername(scanner.next());
         System.out.print("Enter password: ");
         user.setPassword(scanner.next());
-        userService.login(user);
-        showMenuForUser(user);
+        if(userService.login(user))
+            showMenuForUser(user);
     }
 
     public static void showAllArticles() throws SQLException {
         Article[] articles;
         articles = Arrays.copyOf(userService.load(), 1000);
-        for (int i = 0; i < articles.length; i++) {
-            if (articles[i] != null)
-                System.out.println(articles[i].showSummary());
+        for (Article article : articles) {
+            if (article != null)
+                System.out.println(article.showSummary());
             else break;
         }
     }
@@ -49,11 +52,32 @@ public class Main {
     public static void showAllArticles(User user) throws SQLException {
         Article[] articles;
         articles = Arrays.copyOf(userService.load(user), 1000);
-        for (int i = 0; i < articles.length; i++) {
-            if (articles[i] != null)
-                System.out.println(articles[i]);
+        for (Article article : articles) {
+            if (article != null)
+                System.out.println(article);
             else break;
         }
+        System.out.println("Press enter to continue");
+        try {
+            System.in.read();
+        } catch (Exception ignored) {
+        }
+    }
+
+    public static void addArticle(User user) throws SQLException {
+        Article article = new Article();
+        System.out.println("Enter title: ");
+        article.setTitle(scanner.nextLine());
+        System.out.println("Enter brief: ");
+        article.setBrief(scanner.nextLine());
+        System.out.println("Enter content: ");
+        article.setContent(scanner.nextLine());
+        System.out.println("be published ? (enter yes or no):  ");
+        String publish = scanner.next();
+        article.setIsPublished(Objects.equals(publish, "yes"));
+        article.setUserId(user.getId());
+        article.setCreateDate(Date.valueOf(java.time.LocalDate.now()));
+        userService.addArticle(article, user);
     }
 
     public static void showMenuForUser(User user) throws SQLException {
@@ -68,7 +92,7 @@ public class Main {
             if (Objects.equals(command, "1")) {
                 showAllArticles(user);
             } else if (Objects.equals(command, "2")) {
-
+                addArticle(user);
             } else if (Objects.equals(command, "3")) {
 
             } else if (Objects.equals(command, "4")) {
@@ -97,6 +121,5 @@ public class Main {
                 break;
             }
         }
-
     }
 }

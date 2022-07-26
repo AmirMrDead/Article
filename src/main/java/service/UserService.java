@@ -20,7 +20,7 @@ public class UserService {
         }
     }
 
-    public void login(User user) throws SQLException {
+    public boolean login(User user) throws SQLException {
         ResultSet resultSet = userRepository.load(user);
         if (resultSet.next()) {
             user.setId(resultSet.getInt("id"));
@@ -30,7 +30,11 @@ public class UserService {
                 System.in.read();
             } catch (Exception ignored) {
             }
+            resultSet.close();
+            return true;
         }
+        resultSet.close();
+        return false;
     }
 
     public Article[] load(User user) throws SQLException {

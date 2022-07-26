@@ -42,7 +42,7 @@ public class ArticleRepository {
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
         preparedStatement.setInt(1,id);
-        return preparedStatement.executeQuery(query);
+        return preparedStatement.executeQuery();
     }
 
     public void edit(boolean isPublished, int id) throws SQLException {

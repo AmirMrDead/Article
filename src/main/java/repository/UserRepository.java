@@ -24,10 +24,10 @@ public class UserRepository {
 
     public ResultSet load(User user) throws SQLException {
         final String query = """
-                select * from users where national_code = ? and password = ?;
+                select * from users where username = ? and password = ?;
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
-        preparedStatement.setString(1, user.getNationalCode());
+        preparedStatement.setString(1, user.getUsername());
         preparedStatement.setString(2, user.getPassword());
         return preparedStatement.executeQuery();
 
