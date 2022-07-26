@@ -1,13 +1,10 @@
 package service;
 
-import config.DBConfig;
 import entity.Article;
 import entity.User;
 import repository.ArticleRepository;
 import repository.UserRepository;
 
-import javax.xml.transform.Result;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -57,6 +54,26 @@ public class UserService {
         return articles;
     }
 
+    public Article[] load() throws SQLException {
+        ResultSet resultSet = articleRepository.load();
+        Article[] articles = new Article[1000];
+        int index = 0;
+        while(resultSet.next()){
+            Article article = new Article();
+            article.setId(resultSet.getInt("id"));
+            article.setTitle(resultSet.getString("title"));
+            article.setBrief(resultSet.getString("brief"));
+            article.setContent(resultSet.getString("content"));
+            article.setCreateDate(resultSet.getDate("create_date"));
+            article.setIsPublished(resultSet.getBoolean("is_published"));
+            article.setUserId(resultSet.getInt("user_id"));
+            articles[index] = article;
+            index++;
+        }
+        resultSet.close();
+        return articles;
+    }
+
     public void edit(boolean isPublished, int id, User user) throws SQLException {
         ResultSet resultSet = articleRepository.load(id);
         if (resultSet.next()) {
@@ -85,23 +102,5 @@ public class UserService {
         userRepository.changePassword(user, password);
     }
 
-    public Article[] loadAllArticles() throws SQLException {
-        ResultSet resultSet = articleRepository.load();
-        Article[] articles = new Article[1000];
-        int index = 0;
-        while(resultSet.next()){
-            Article article = new Article();
-            article.setId(resultSet.getInt("id"));
-            article.setTitle(resultSet.getString("title"));
-            article.setBrief(resultSet.getString("brief"));
-            article.setContent(resultSet.getString("content"));
-            article.setCreateDate(resultSet.getDate("create_date"));
-            article.setIsPublished(resultSet.getBoolean("is_published"));
-            article.setUserId(resultSet.getInt("user_id"));
-            articles[index] = article;
-            index++;
-        }
-        resultSet.close();
-        return articles;
-    }
+
 }
