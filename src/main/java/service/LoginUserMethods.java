@@ -96,7 +96,7 @@ public class LoginUserMethods {
             else if (Objects.equals(publish, "no"))
                 article.setIsPublished(false);
         }
-        ApplicationObjects.getUserService().edit(article, id, user);
+        ApplicationObjects.getUserService().edit(article, id);
         System.out.println("Done! Your article has been updated");
     }
 
@@ -155,7 +155,7 @@ public class LoginUserMethods {
                 pressEnter();
                 continue;
             }
-            ApplicationObjects.getUserService().edit(!article.getIsPublished(), id, user);
+            ApplicationObjects.getUserService().edit(!article.getIsPublished(), id);
             article.setIsPublished(!article.getIsPublished());
             String published;
             if (article.getIsPublished())

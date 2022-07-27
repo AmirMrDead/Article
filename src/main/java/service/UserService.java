@@ -91,12 +91,12 @@ public class UserService {
     }
 
     // to edit published or unpublished
-    public void edit(boolean isPublished, int id, User user) throws SQLException {
+    public void edit(boolean isPublished, int id) throws SQLException {
         ApplicationObjects.getArticleRepository().edit(isPublished, id);
     }
 
     // to edit article
-    public void edit(Article article, int id, User user) throws SQLException {
+    public void edit(Article article, int id) throws SQLException {
         ApplicationObjects.getArticleRepository().edit(article, id);
     }
 

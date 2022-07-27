@@ -2,6 +2,7 @@ package repository;
 
 import config.DBConfig;
 import entity.Article;
+import service.ApplicationObjects;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +31,8 @@ public class ArticleRepository {
     public ResultSet loadAllArticle() throws SQLException {
         final String query = """
                 select * from article
-                where is_published = true;
+                where is_published = true
+                order by id;
                 """;
         Statement statement = DBConfig.getConnection().createStatement();
         return statement.executeQuery(query);
@@ -41,6 +43,7 @@ public class ArticleRepository {
         final String query = """
                 select * from article
                 where user_id = ?
+                order by id;
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
         preparedStatement.setInt(1, id);
@@ -120,4 +123,5 @@ public class ArticleRepository {
         preparedStatement.setInt(1,id);
         preparedStatement.executeUpdate();
     }
+
 }

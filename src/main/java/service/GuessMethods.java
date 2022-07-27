@@ -30,12 +30,10 @@ public class GuessMethods {
             ApplicationObjects.getUserService().save(user);
             ApplicationObjects.getUserService().login(user);
             System.out.println("Registration was successful");
-            System.out.println("Press enter to continue");
             pressEnter();
             ShowMenuForLoginUser.showMenuForUser(user);
         } else {
             System.out.println("This user exists. try login or signup with new national code and username");
-            System.out.println("Press enter to continue");
             pressEnter();
         }
     }
@@ -63,7 +61,6 @@ public class GuessMethods {
         articles = Arrays.copyOf(ApplicationObjects.getUserService().load(), 1000);
         if (articles[0].getId() == 0) {
             System.out.println("We have no published articles");
-            System.out.println("Press enter to continue");
             pressEnter();
         } else {
             while (true) {
@@ -81,12 +78,10 @@ public class GuessMethods {
                 Article article = ApplicationObjects.getUserService().load(id);
                 if (article == null) {
                     System.out.println("There is no article with this id that has been published");
-                    System.out.println("Press enter to continue");
                     pressEnter();
                     continue;
                 }
                 System.out.println(article);
-                System.out.println("Press enter to continue");
                 pressEnter();
             }
         }
