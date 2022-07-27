@@ -68,42 +68,44 @@ public class LoginUserMethods {
                         pressEnter();
                         continue;
                     }
-                    System.out.println(article);
-                    System.out.println("This is your article");
-                    System.out.println("Which part do you want to change? (Enter exit for exit)");
-                    command = ApplicationObjects.getScanner().next();
-                    if (Objects.equals(command, "title")) {
-                        System.out.print("Enter new title: ");
-                        ApplicationObjects.getScanner().nextLine();
-                        article.setTitle(ApplicationObjects.getScanner().nextLine());
-                        ApplicationObjects.getUserService().edit(article, id, user);
-                        System.out.println("Done! Your article has been updated");
-                        pressEnter();
-                    } else if (Objects.equals(command, "brief")) {
-                        System.out.print("Enter new brief: ");
-                        ApplicationObjects.getScanner().nextLine();
-                        article.setBrief(ApplicationObjects.getScanner().nextLine());
-                        ApplicationObjects.getUserService().edit(article, id, user);
-                        System.out.println("Done! Your article has been updated");
-                        pressEnter();
-                    } else if (Objects.equals(command, "content")) {
-                        System.out.print("Enter new content: ");
-                        ApplicationObjects.getScanner().nextLine();
-                        article.setContent(ApplicationObjects.getScanner().nextLine());
-                        ApplicationObjects.getUserService().edit(article, id, user);
-                        System.out.println("Done! Your article has been updated");
-                        pressEnter();
-                    } else if (Objects.equals(command, "isPublished")) {
-                        System.out.print("Enter new title");
-                        ApplicationObjects.getScanner().nextLine();
-                        article.setTitle(ApplicationObjects.getScanner().nextLine());
-                        ApplicationObjects.getUserService().edit(article, id, user);
-                        System.out.println("Done! Your article has been updated");
-                        pressEnter();
-                    } else if (Objects.equals(command, "exit")) {
-                        break;
-                    } else {
-                        System.out.println("Wrong command. try again");
+                    while(true){
+                        System.out.println(article);
+                        System.out.println("This is your article");
+                        System.out.println("Which part do you want to change? (Enter exit for exit)");
+                        command = ApplicationObjects.getScanner().next();
+                        if (Objects.equals(command, "title")) {
+                            System.out.print("Enter new title: ");
+                            ApplicationObjects.getScanner().nextLine();
+                            article.setTitle(ApplicationObjects.getScanner().nextLine());
+                            ApplicationObjects.getUserService().edit(article, id, user);
+                            System.out.println("Done! Your article has been updated");
+                            pressEnter();
+                        } else if (Objects.equals(command, "brief")) {
+                            System.out.print("Enter new brief: ");
+                            ApplicationObjects.getScanner().nextLine();
+                            article.setBrief(ApplicationObjects.getScanner().nextLine());
+                            ApplicationObjects.getUserService().edit(article, id, user);
+                            System.out.println("Done! Your article has been updated");
+                            pressEnter();
+                        } else if (Objects.equals(command, "content")) {
+                            System.out.print("Enter new content: ");
+                            ApplicationObjects.getScanner().nextLine();
+                            article.setContent(ApplicationObjects.getScanner().nextLine());
+                            ApplicationObjects.getUserService().edit(article, id, user);
+                            System.out.println("Done! Your article has been updated");
+                            pressEnter();
+                        } else if (Objects.equals(command, "isPublished")) {
+                            System.out.print("Enter new title");
+                            ApplicationObjects.getScanner().nextLine();
+                            article.setTitle(ApplicationObjects.getScanner().nextLine());
+                            ApplicationObjects.getUserService().edit(article, id, user);
+                            System.out.println("Done! Your article has been updated");
+                            pressEnter();
+                        } else if (Objects.equals(command, "exit")) {
+                            break;
+                        } else {
+                            System.out.println("Wrong command. try again");
+                        }
                     }
                 }
             } else if (Objects.equals(command, "2")) {
