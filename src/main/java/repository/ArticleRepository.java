@@ -97,10 +97,20 @@ public class ArticleRepository {
         preparedStatement.close();
     }
 
-    public void delete(int id) throws SQLException {
+    public void deleteOne(int id) throws SQLException {
         final String query = """
                 delete from article
                 where id = ?;
+                """;
+        PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
+        preparedStatement.setInt(1,id);
+        preparedStatement.executeUpdate();
+    }
+
+    public void deleteAll(int id) throws SQLException {
+        final String query = """
+                delete from article
+                where user_id = ?;
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
         preparedStatement.setInt(1,id);

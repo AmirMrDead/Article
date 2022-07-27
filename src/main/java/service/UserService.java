@@ -2,8 +2,6 @@ package service;
 
 import entity.Article;
 import entity.User;
-import repository.ArticleRepository;
-import repository.UserRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -127,16 +125,24 @@ public class UserService {
         article.setUserId(resultSet.getInt("user_id"));
     }
 
-    public boolean deleteArticle(User user,int id) throws SQLException{
+    public boolean deleteOneArticle(User user, int id) throws SQLException{
         ResultSet resultSet = ApplicationObjects.getArticleRepository().loadOneArticleForUser(id);
         if (resultSet.next() && user.getId() == resultSet.getInt("user_id")) {
-            ApplicationObjects.getArticleRepository().delete(id);
+            ApplicationObjects.getArticleRepository().deleteOne(id);
             resultSet.close();
             return true;
         } else {
             resultSet.close();
             return false;
         }
+    }
+
+    public void deleteUser(User user) throws SQLException{
+       ApplicationObjects.getUserRepository().deleteUser(user);
+    }
+
+    public void deleteAllArticle(User user) throws SQLException{
+            ApplicationObjects.getArticleRepository().deleteAll(user.getId());
     }
 
 }

@@ -67,4 +67,14 @@ public class UserRepository {
         preparedStatement.executeUpdate();
     }
 
+    public void deleteUser(User user) throws SQLException {
+        final String query = """
+                delete from users
+                where id = ?;
+                """;
+        PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
+        preparedStatement.setInt(1,user.getId());
+        preparedStatement.executeUpdate();
+    }
+
 }

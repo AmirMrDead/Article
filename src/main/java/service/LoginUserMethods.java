@@ -35,7 +35,6 @@ public class LoginUserMethods {
                     System.out.println(article);
                 else break;
             }
-//            pressEnter();
             return true;
         }
     }
@@ -107,6 +106,18 @@ public class LoginUserMethods {
         pressEnter();
     }
 
+    public static void deleteUser(User user) throws SQLException {
+        System.out.println("Enter confirm if you want to delete your account");
+        if(Objects.equals(ApplicationObjects.getScanner().next(), "confirm")){
+            ApplicationObjects.getUserService().deleteAllArticle(user);
+            ApplicationObjects.getUserService().deleteUser(user);
+        }
+        else{
+            System.out.println("Not confirmed");
+        }
+        pressEnter();
+    }
+
     private static void selectDeleteArticle(User user) throws SQLException {
         while(true){
             if(showAllUserArticles(user,"Enter the id of the article you want to delete (Enter exit for exit):"))
@@ -115,7 +126,7 @@ public class LoginUserMethods {
             if(Objects.equals(temp, "exit"))
                 break;
             int id = Integer.parseInt(temp);
-            if (ApplicationObjects.getUserService().deleteArticle(user, id)) {
+            if (ApplicationObjects.getUserService().deleteOneArticle(user, id)) {
                 System.out.println("Done! ");
             } else {
                 System.out.println("There is no article with this id for you");

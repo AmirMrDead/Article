@@ -14,10 +14,11 @@ public class ShowMenuForLoginUser {
         String command;
         while (true) {
             System.out.println("1) My articles");
-            System.out.println("2) add new article");
-            System.out.println("3) edit article");
-            System.out.println("4) change password");
-            System.out.println("5) logout");
+            System.out.println("2) Add new article");
+            System.out.println("3) Edit article");
+            System.out.println("4) Change password");
+            System.out.println("5) Logout");
+            System.out.println("6) Delete my account");
             command = ApplicationObjects.getScanner().next();
             if (Objects.equals(command, "1")) {
                 onePossibleArticle(user);
@@ -28,6 +29,9 @@ public class ShowMenuForLoginUser {
             } else if (Objects.equals(command, "4")) {
                 LoginUserMethods.changePassword(user);
             } else if (Objects.equals(command, "5")) {
+                break;
+            }else if (Objects.equals(command, "6")) {
+                LoginUserMethods.deleteUser(user);
                 break;
             }else{
                 System.out.println("Wrong input");
