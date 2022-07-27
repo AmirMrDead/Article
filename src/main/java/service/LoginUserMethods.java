@@ -60,7 +60,7 @@ public class LoginUserMethods {
             command = ApplicationObjects.getScanner().next();
             if (Objects.equals(command, "1")) {
                 while (true) {
-                    if(!showAllUserArticles(user, "Enter the id of the article you want to edit (Enter exit for exit): "))
+                    if(showAllUserArticles(user, "Enter the id of the article you want to edit (Enter exit for exit): "))
                         break;
                     command = ApplicationObjects.getScanner().next();
                     if (Objects.equals(command, "exit"))
@@ -97,7 +97,7 @@ public class LoginUserMethods {
                 }
             } else if (Objects.equals(command, "2")) {
                 while (true) {
-                    if(!showAllUserArticles(user, "Enter the id of the article you want to published or unpublished (Enter exit for exit): "))
+                    if(showAllUserArticles(user, "Enter the id of the article you want to published or unpublished (Enter exit for exit): "))
                         break;
                     command = ApplicationObjects.getScanner().next();
                     if (Objects.equals(command, "exit"))
@@ -164,8 +164,8 @@ public class LoginUserMethods {
         if(showAllArticles(user)){
             System.out.println("These are your articles");
             System.out.println(x);
-            return true;
-        }else return false;
+            return false;
+        }else return true;
     }
 
     public static void changePassword(User user) throws SQLException {
