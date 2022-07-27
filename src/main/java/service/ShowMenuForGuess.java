@@ -15,6 +15,7 @@ public class ShowMenuForGuess {
             System.out.println("2) Login");
             System.out.println("3) Show All articles that have been published");
             System.out.println("4) Exit");
+            System.out.print("Enter your command: ");
             command = ApplicationObjects.getScanner().next();
             if (Objects.equals(command, "1")) {
                 GuessMethods.signUp();
@@ -24,6 +25,8 @@ public class ShowMenuForGuess {
                 GuessMethods.showAllArticles();
             } else if (Objects.equals(command, "4")) {
                 break;
+            }else{
+                System.out.println("Wrong input");
             }
         }
     }

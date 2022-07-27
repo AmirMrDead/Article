@@ -62,7 +62,7 @@ public class LoginUserMethods {
                 while (true) {
                     if (showAllUserArticles(user, "Enter the id of the article you want to edit (Enter exit for exit): "))
                         break;
-                    command = ApplicationObjects.getScanner().next();
+                    command = Check.checkInteger(ApplicationObjects.getScanner().next(),"[\\d]*");
                     if (Objects.equals(command, "exit"))
                         break;
                     int id = Integer.parseInt(command);
@@ -99,7 +99,7 @@ public class LoginUserMethods {
                 while (true) {
                     if (showAllUserArticles(user, "Enter the id of the article you want to published or unpublished (Enter exit for exit): "))
                         break;
-                    command = ApplicationObjects.getScanner().next();
+                    command = Check.checkInteger(ApplicationObjects.getScanner().next(),"[\\d]*");
                     if (Objects.equals(command, "exit"))
                         break;
                     int id = Integer.parseInt(command);
@@ -124,7 +124,7 @@ public class LoginUserMethods {
                 while(true){
                     if(showAllUserArticles(user,"Enter the id of the article you want to delete (Enter exit for exit):"))
                         break;
-                    String temp = ApplicationObjects.getScanner().next();
+                    String temp = Check.checkInteger(ApplicationObjects.getScanner().next(),"[\\d]*");
                     if(Objects.equals(temp, "exit"))
                         break;
                     int id = Integer.parseInt(temp);

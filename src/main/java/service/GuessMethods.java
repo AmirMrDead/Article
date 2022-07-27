@@ -76,7 +76,7 @@ public class GuessMethods {
                 }
                 System.out.println("This is a summary of our published articles");
                 System.out.println("Enter the id of the article you want to see in detail (Enter 0 for exit)");
-                id = Integer.parseInt(ApplicationObjects.getScanner().next());
+                id = Integer.parseInt(Check.checkUserInformation(ApplicationObjects.getScanner().next(),"[\\d]*"));
                 if (id == 0)
                     break;
                 Article article = ApplicationObjects.getUserService().load(id);

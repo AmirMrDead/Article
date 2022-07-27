@@ -29,6 +29,8 @@ public class ShowMenuForLoginUser {
                 LoginUserMethods.changePassword(user);
             } else if (Objects.equals(command, "5")) {
                 break;
+            }else{
+                System.out.println("Wrong input");
             }
         }
     }
