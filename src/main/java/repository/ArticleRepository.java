@@ -29,7 +29,7 @@ public class ArticleRepository {
     public ResultSet loadAllArticle() throws SQLException {
         final String query = """
                 select * from article
-                where is_published = true;         
+                where is_published = true;
                 """;
         Statement statement = DBConfig.getConnection().createStatement();
         return statement.executeQuery(query);
@@ -38,7 +38,7 @@ public class ArticleRepository {
     public ResultSet loadAllArticle(int id) throws SQLException {
         final String query = """
                 select * from article
-                where user_id = ?          
+                where user_id = ?
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
         preparedStatement.setInt(1, id);
@@ -48,7 +48,7 @@ public class ArticleRepository {
     public ResultSet loadOneArticleForUser(int id) throws SQLException {
         final String query = """
                 select * from article
-                where id = ?          
+                where id = ?
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
         preparedStatement.setInt(1, id);
@@ -58,7 +58,7 @@ public class ArticleRepository {
     public ResultSet loadOneArticleForGuess(int id) throws SQLException {
         final String query = """
                 select * from article
-                where id = ? and is_published = true;       
+                where id = ? and is_published = true;
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
         preparedStatement.setInt(1, id);
@@ -85,7 +85,7 @@ public class ArticleRepository {
                 brief = ?,
                 content = ?,
                 is_published = ?
-                where id = ?                         
+                where id = ?
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
         preparedStatement.setString(1, article.getTitle());
@@ -95,5 +95,15 @@ public class ArticleRepository {
         preparedStatement.setInt(5, id);
         preparedStatement.executeUpdate();
         preparedStatement.close();
+    }
+
+    public void delete(int id) throws SQLException {
+        final String query = """
+                delete from article
+                where id = ?;
+                """;
+        PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
+        preparedStatement.setInt(1,id);
+        preparedStatement.executeUpdate();
     }
 }

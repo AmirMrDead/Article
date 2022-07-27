@@ -17,14 +17,14 @@ public class GuessMethods {
         User user = new User();
         String password;
         System.out.print("Enter username: ");
-        user.setUsername(Check.checkUserInformation(ApplicationObjects.getScanner().next() , ""));
+        user.setUsername(Check.checkUserInformation(ApplicationObjects.getScanner().next(), ""));
         System.out.print("Enter national code: ");
-        password = Check.checkUserInformation(ApplicationObjects.getScanner().next(),"^\\d{10}$");
+        password = Check.checkUserInformation(ApplicationObjects.getScanner().next(), "^\\d{10}$");
         user.setNationalCode(password);
         user.setPassword(password);
         System.out.print("Enter birthday: ");
         String date = Check.checkUserInformation(ApplicationObjects.getScanner().next()
-                ,"^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$");
+                , "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$");
         user.setBirthday(date);
         if (!ApplicationObjects.getUserService().checkUserExist(user)) {
             ApplicationObjects.getUserService().save(user);
@@ -52,30 +52,11 @@ public class GuessMethods {
             pressEnter();
             ShowMenuForLoginUser.showMenuForUser(user);
         } else {
-            System.out.println("your username or password is incorrect");
-            System.out.println("Forgot your password? Enter yes otherwise Enter no");
-            String temp = ApplicationObjects.getScanner().next();
-            if(Objects.equals(temp, "yes")){
-                System.out.print("Enter your username: ");
-                String username = Check.checkUserInformation(ApplicationObjects.getScanner().next(),"");
-                System.out.print("Enter your national code: ");
-                String nationalCode = Check.checkUserInformation(ApplicationObjects.getScanner().next(),"^\\d{10}$");
-                System.out.print("Enter your birthday: ");
-                String birthday = Check.checkUserInformation(ApplicationObjects.getScanner().next()
-                        ,"^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$");
-                if(ApplicationObjects.getUserService().forgotPassword(username,nationalCode,birthday) == null){
-                    System.out.println("Not found!");
-                }else{
-                    System.out.println("Your password is: " +
-                            ApplicationObjects.getUserService().forgotPassword(username,nationalCode,birthday));
-                }
-            }
-            else if(!Objects.equals(temp, "no"))
-                System.out.println("Wrong input. Let's go to the menu");
-            System.out.println("Press enter to continue");
+            forgotPassword();
             pressEnter();
         }
     }
+
 
     public static void showAllArticles() throws SQLException {
         String command;
@@ -110,6 +91,29 @@ public class GuessMethods {
                 pressEnter();
             }
         }
+    }
+
+    private static void forgotPassword() throws SQLException {
+        System.out.println("your username or password is incorrect");
+        System.out.println("Forgot your password? Enter yes otherwise Enter no");
+        String temp = ApplicationObjects.getScanner().next();
+        if (Objects.equals(temp, "yes")) {
+            System.out.print("Enter your username: ");
+            String username = Check.checkUserInformation(ApplicationObjects.getScanner().next(), "");
+            System.out.print("Enter your national code: ");
+            String nationalCode = Check.checkUserInformation(ApplicationObjects.getScanner().next(), "^\\d{10}$");
+            System.out.print("Enter your birthday: ");
+            String birthday = Check.checkUserInformation(ApplicationObjects.getScanner().next()
+                    , "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$");
+            if (ApplicationObjects.getUserService().forgotPassword(username, nationalCode, birthday) == null) {
+                System.out.println("Not found!");
+            } else {
+                System.out.println("Your password is: " +
+                        ApplicationObjects.getUserService().forgotPassword(username, nationalCode, birthday));
+            }
+        } else if (!Objects.equals(temp, "no"))
+            System.out.println("Wrong input. Let's go to the menu");
+        System.out.println("Press enter to continue");
     }
 
     private static void pressEnter() {

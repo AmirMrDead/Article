@@ -127,4 +127,16 @@ public class UserService {
         article.setUserId(resultSet.getInt("user_id"));
     }
 
+    public boolean deleteArticle(User user,int id) throws SQLException{
+        ResultSet resultSet = ApplicationObjects.getArticleRepository().loadOneArticleForUser(id);
+        if (resultSet.next() && user.getId() == resultSet.getInt("user_id")) {
+            ApplicationObjects.getArticleRepository().delete(id);
+            resultSet.close();
+            return true;
+        } else {
+            resultSet.close();
+            return false;
+        }
+    }
+
 }
