@@ -86,9 +86,12 @@ public class UserService {
             article.setCreateDate(resultSet.getDate("create_date"));
             article.setIsPublished(resultSet.getBoolean("is_published"));
             article.setUserId(resultSet.getInt("user_id"));
+            resultSet.close();
+            return article;
+        } else {
+            resultSet.close();
+            return null;
         }
-        resultSet.close();
-        return article;
     }
 
     public void edit(boolean isPublished, int id, User user) throws SQLException {

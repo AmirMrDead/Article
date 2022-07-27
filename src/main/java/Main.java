@@ -49,7 +49,7 @@ public class Main {
         user.setUsername(scanner.next());
         System.out.print("Enter password: ");
         user.setPassword(scanner.next());
-        if (userService.login(user)){
+        if (userService.login(user)) {
             System.out.println("Login done");
             System.out.println("Press enter to continue");
             try {
@@ -57,8 +57,7 @@ public class Main {
             } catch (Exception ignored) {
             }
             showMenuForUser(user);
-        }
-        else{
+        } else {
             System.out.println("your username or password is incorrect");
             System.out.println("Press enter to continue");
             try {
@@ -69,37 +68,42 @@ public class Main {
     }
 
     public static void showAllArticles() throws SQLException {
+        String command;
         Article[] articles;
         articles = Arrays.copyOf(userService.load(), 1000);
-        if(articles[0].getId() == 0){
+        if (articles[0].getId() == 0) {
             System.out.println("We have no published articles");
             System.out.println("Press enter to continue");
             try {
                 System.in.read();
             } catch (Exception ignored) {
             }
-        }
-        else{
+        } else {
+            int id;
             for (Article article : articles) {
                 if (article != null)
                     System.out.println(article.showSummary());
                 else break;
             }
+            /*System.out.println("This is a summary of our published articles");
+            System.out.println("Enter the id of the article you want to see in detail");
+            id = Integer.parseInt(scanner.next());
+            Article article = userService.load(id,new User());
+            System.out.println(article);*/
         }
     }
 
     public static void showAllArticles(User user) throws SQLException {
         Article[] articles;
         articles = Arrays.copyOf(userService.load(user), 1000);
-        if(articles[0].getId() == 0){
+        if (articles[0].getId() == 0) {
             System.out.println("you have no article");
             System.out.println("Press enter to continue");
             try {
                 System.in.read();
             } catch (Exception ignored) {
             }
-        }
-        else{
+        } else {
             for (Article article : articles) {
                 if (article != null)
                     System.out.println(article);
@@ -150,8 +154,12 @@ public class Main {
                     int id = Integer.parseInt(command);
                     Article article;
                     article = userService.load(Integer.parseInt(command), user);
+                    if (article == null) {
+                        System.out.println("There is no article with this id for you");
+                        continue;
+                    }
                     System.out.println(article);
-                    System.out.println("this is your article");
+                    System.out.println("This is your article");
                     System.out.println("Which part do you want to change? (Enter exit for exit)");
                     command = scanner.next();
                     if (Objects.equals(command, "title")) {
@@ -159,38 +167,55 @@ public class Main {
                         scanner.nextLine();
                         article.setTitle(scanner.nextLine());
                         userService.edit(article, id, user);
+                        System.out.println("Done! Your article has been updated");
                     } else if (Objects.equals(command, "brief")) {
                         System.out.print("Enter new brief: ");
                         scanner.nextLine();
                         article.setBrief(scanner.nextLine());
                         userService.edit(article, id, user);
+                        System.out.println("Done! Your article has been updated");
                     } else if (Objects.equals(command, "content")) {
                         System.out.print("Enter new content: ");
                         scanner.nextLine();
                         article.setContent(scanner.nextLine());
                         userService.edit(article, id, user);
+                        System.out.println("Done! Your article has been updated");
                     } else if (Objects.equals(command, "isPublished")) {
                         System.out.print("Enter new title");
                         scanner.nextLine();
                         article.setTitle(scanner.nextLine());
                         userService.edit(article, id, user);
+                        System.out.println("Done! Your article has been updated");
                     } else if (Objects.equals(command, "exit")) {
                         break;
+                    } else {
+                        System.out.println("Wrong command. try again");
                     }
                 }
             } else if (Objects.equals(command, "2")) {
-                showAllArticles(user);
-                System.out.println("These are your articles");
-                System.out.println("Enter the id of the article you want to published or unpublished (Enter exit for exit): ");
-                command = scanner.next();
-                if (Objects.equals(command, "exit"))
-                    break;
-                int id = Integer.parseInt(command);
-                Article article;
-                article = userService.load(Integer.parseInt(command), user);
-                userService.edit(!article.getIsPublished(), id, user);
-                article.setIsPublished(!article.getIsPublished());
-                System.out.println("done! your article is " + article.getIsPublished() + " from now");
+                while (true) {
+                    showAllArticles(user);
+                    System.out.println("These are your articles");
+                    System.out.println("Enter the id of the article you want to published or unpublished (Enter exit for exit): ");
+                    command = scanner.next();
+                    if (Objects.equals(command, "exit"))
+                        break;
+                    int id = Integer.parseInt(command);
+                    Article article;
+                    article = userService.load(Integer.parseInt(command), user);
+                    if (article == null) {
+                        System.out.println("There is no article with this id for you");
+                        continue;
+                    }
+                    userService.edit(!article.getIsPublished(), id, user);
+                    article.setIsPublished(!article.getIsPublished());
+                    String published;
+                    if (article.getIsPublished())
+                        published = "published";
+                    else
+                        published = "unpublished";
+                    System.out.println("Done! your article with id: " + id + " is " + published + " from now");
+                }
             } else if (Objects.equals(command, "3")) {
                 break;
             }
