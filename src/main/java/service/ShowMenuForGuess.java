@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class ShowMenuForGuess {
 
+    private ShowMenuForGuess(){}
     public static void showMenuForGuess() throws SQLException {
         String command;
         while (true) {

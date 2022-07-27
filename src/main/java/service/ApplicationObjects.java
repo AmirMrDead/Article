@@ -27,4 +27,6 @@ public class ApplicationObjects {
     public static ArticleRepository getArticleRepository() {
         return articleRepository;
     }
+
+    private ApplicationObjects(){}
 }

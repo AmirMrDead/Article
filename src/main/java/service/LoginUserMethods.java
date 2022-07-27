@@ -10,6 +10,7 @@ import java.util.Objects;
 
 public class LoginUserMethods {
 
+    private LoginUserMethods(){}
     public static void showAllArticles(User user) throws SQLException {
         Article[] articles;
         articles = Arrays.copyOf(ApplicationObjects.getUserService().load(user), 1000);

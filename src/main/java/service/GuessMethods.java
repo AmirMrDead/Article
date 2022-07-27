@@ -9,6 +9,7 @@ import java.util.Objects;
 
 public class GuessMethods {
 
+    private GuessMethods(){}
     public static void signUp() throws SQLException {
         User user = new User();
         String password;
