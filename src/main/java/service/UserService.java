@@ -75,10 +75,28 @@ public class UserService {
     }
 
     public Article load(int id, User user) throws SQLException {
-        ResultSet resultSet = articleRepository.loadOneArticle(id);
-        int index = 0;
+        ResultSet resultSet = articleRepository.loadOneArticleForUser(id);
         Article article = new Article();
         if (resultSet.next() && user.getId() == resultSet.getInt("user_id")) {
+            article.setId(resultSet.getInt("id"));
+            article.setTitle(resultSet.getString("title"));
+            article.setBrief(resultSet.getString("brief"));
+            article.setContent(resultSet.getString("content"));
+            article.setCreateDate(resultSet.getDate("create_date"));
+            article.setIsPublished(resultSet.getBoolean("is_published"));
+            article.setUserId(resultSet.getInt("user_id"));
+            resultSet.close();
+            return article;
+        } else {
+            resultSet.close();
+            return null;
+        }
+    }
+
+    public Article load(int id) throws SQLException {
+        ResultSet resultSet = articleRepository.loadOneArticleForGuess(id);
+        Article article = new Article();
+        if (resultSet.next()) {
             article.setId(resultSet.getInt("id"));
             article.setTitle(resultSet.getString("title"));
             article.setBrief(resultSet.getString("brief"));

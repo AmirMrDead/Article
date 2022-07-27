@@ -45,10 +45,20 @@ public class ArticleRepository {
         return preparedStatement.executeQuery();
     }
 
-    public ResultSet loadOneArticle(int id) throws SQLException {
+    public ResultSet loadOneArticleForUser(int id) throws SQLException {
         final String query = """
                 select * from article
                 where id = ?          
+                """;
+        PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
+        preparedStatement.setInt(1,id);
+        return preparedStatement.executeQuery();
+    }
+
+    public ResultSet loadOneArticleForGuess(int id) throws SQLException {
+        final String query = """
+                select * from article
+                where id = ? and is_published = true;       
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
         preparedStatement.setInt(1,id);
