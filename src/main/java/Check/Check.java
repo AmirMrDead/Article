@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class Check {
 
-    public static String check(String input, String regex){
+    public static String checkSignUp(String input, String regex){
         if(Objects.equals(regex, "")){
             if((input.length() < 3 || input.length() > 10) || Character.isDigit(input.charAt(0)) ) {
                 while(true){
@@ -33,6 +33,16 @@ public class Check {
         }
     }
 
+    public  static String checkPublished(String input){
+        while (true){
+            if(!Objects.equals(input, "yes") && !Objects.equals(input, "no")){
+                System.out.println("Wrong. Just Enter yes or no");
+                input = ApplicationObjects.getScanner().next();
+                if(Objects.equals(input, "yes") || Objects.equals(input, "no"))
+                    return input;
+            }else return input;
+        }
+    }
     public static void main(String[] args) {
 
     }

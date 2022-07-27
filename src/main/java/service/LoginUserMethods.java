@@ -1,5 +1,6 @@
 package service;
 
+import Check.Check;
 import entity.Article;
 import entity.User;
 
@@ -43,6 +44,7 @@ public class LoginUserMethods {
         article.setContent(ApplicationObjects.getScanner().nextLine());
         System.out.println("Be published ? (enter yes or no):  ");
         String publish = ApplicationObjects.getScanner().next();
+        Check.checkPublished(publish);
         article.setIsPublished(Objects.equals(publish, "yes"));
         article.setUserId(user.getId());
         article.setCreateDate(Date.valueOf(java.time.LocalDate.now()));
@@ -141,10 +143,11 @@ public class LoginUserMethods {
         else if (Objects.equals(command, "brief"))
             article.setBrief(ApplicationObjects.getScanner().nextLine());
         else if (Objects.equals(command, "isPublished")) {
-            String temp = ApplicationObjects.getScanner().nextLine();
-            if (Objects.equals(temp, "yes"))
+            String publish = ApplicationObjects.getScanner().nextLine();
+            Check.checkPublished(publish);
+            if (Objects.equals(publish, "yes"))
                 article.setIsPublished(true);
-            else if (Objects.equals(temp, "no"))
+            else if (Objects.equals(publish, "no"))
                 article.setIsPublished(false);
         }
         ApplicationObjects.getUserService().edit(article, id, user);

@@ -16,13 +16,13 @@ public class GuessMethods {
         User user = new User();
         String password;
         System.out.print("Enter username: ");
-        user.setUsername(Check.check(ApplicationObjects.getScanner().next() , ""));
+        user.setUsername(Check.checkSignUp(ApplicationObjects.getScanner().next() , ""));
         System.out.print("Enter national code: ");
-        password = Check.check(ApplicationObjects.getScanner().next(),"^\\d{10}$");
+        password = Check.checkSignUp(ApplicationObjects.getScanner().next(),"^\\d{10}$");
         user.setNationalCode(password);
         user.setPassword(password);
         System.out.print("Enter birthday: ");
-        String date = Check.check(ApplicationObjects.getScanner().next()
+        String date = Check.checkSignUp(ApplicationObjects.getScanner().next()
                 ,"^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$");
         user.setBirthday(date);
         if (!ApplicationObjects.getUserService().checkUserExist(user)) {
