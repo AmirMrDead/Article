@@ -1,5 +1,6 @@
 package service;
 
+import Check.Check;
 import entity.Article;
 import entity.User;
 
@@ -22,7 +23,9 @@ public class GuessMethods {
         user.setNationalCode(password);
         user.setPassword(password);
         System.out.print("Enter birthday: ");
-        user.setBirthday(ApplicationObjects.getScanner().next());
+        String date = Check.checkDate(ApplicationObjects.getScanner().next()
+                ,"^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$");
+        user.setBirthday(date);
         if (!ApplicationObjects.getUserService().checkUserExist(user)) {
             ApplicationObjects.getUserService().save(user);
             ApplicationObjects.getUserService().login(user);
