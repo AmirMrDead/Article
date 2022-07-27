@@ -73,6 +73,8 @@ public class LoginUserMethods {
                 selectDeleteArticle(user);
             } else if (Objects.equals(command, "4")) {
                 break;
+            } else{
+                System.out.println("Wrong input");
             }
         }
     }

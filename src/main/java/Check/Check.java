@@ -19,6 +19,7 @@ public class Check {
                     }
                 }
             }
+            else return input;
         }
         if (Pattern.matches(regex, input)) {
             return input;
