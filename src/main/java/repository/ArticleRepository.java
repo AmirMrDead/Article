@@ -26,6 +26,7 @@ public class ArticleRepository {
         preparedStatement.close();
     }
 
+    // to
     public ResultSet loadAllArticle() throws SQLException {
         final String query = """
                 select * from article

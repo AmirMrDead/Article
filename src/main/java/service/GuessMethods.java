@@ -48,7 +48,6 @@ public class GuessMethods {
         user.setPassword(ApplicationObjects.getScanner().next());
         if (ApplicationObjects.getUserService().login(user)) {
             System.out.println("Login done");
-            System.out.println("Press enter to continue");
             pressEnter();
             ShowMenuForLoginUser.showMenuForUser(user);
         } else {
@@ -117,6 +116,7 @@ public class GuessMethods {
     }
 
     private static void pressEnter() {
+        System.out.println("Press enter to continue");
         try {
             System.in.read();
         } catch (Exception ignored) {
