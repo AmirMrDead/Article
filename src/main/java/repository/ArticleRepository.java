@@ -26,7 +26,7 @@ public class ArticleRepository {
         preparedStatement.close();
     }
 
-    // to
+    // to load articles those are published
     public ResultSet loadAllArticle() throws SQLException {
         final String query = """
                 select * from article
@@ -36,6 +36,7 @@ public class ArticleRepository {
         return statement.executeQuery(query);
     }
 
+    // to load user's article
     public ResultSet loadAllArticle(int id) throws SQLException {
         final String query = """
                 select * from article
@@ -66,6 +67,7 @@ public class ArticleRepository {
         return preparedStatement.executeQuery();
     }
 
+    // edit published
     public void edit(boolean isPublished, int id) throws SQLException {
         final String query = """
                 update article
@@ -79,6 +81,7 @@ public class ArticleRepository {
         preparedStatement.close();
     }
 
+    // edit article
     public void edit(Article article, int id) throws SQLException {
         final String query = """
                 update article

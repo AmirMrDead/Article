@@ -33,6 +33,7 @@ public class UserRepository {
 
     }
 
+    // for forgot password
     public ResultSet load(String username, String nationalCode, String birthday) throws SQLException {
         final String query = """
                 select * from users where username = ? and national_code = ? and birthday = ?;
