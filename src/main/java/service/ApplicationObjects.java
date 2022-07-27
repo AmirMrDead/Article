@@ -5,6 +5,7 @@ import repository.UserRepository;
 
 import java.util.Scanner;
 
+// for get objects to other classes
 public class ApplicationObjects {
 
     private static final Scanner scanner = new Scanner(System.in);

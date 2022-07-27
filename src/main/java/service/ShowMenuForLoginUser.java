@@ -39,6 +39,7 @@ public class ShowMenuForLoginUser {
         }
     }
 
+    // check user has article or not
     private static void onePossibleArticle(User user) throws SQLException {
         if(LoginUserMethods.showAllArticles(user)){
             System.out.println("these are your articles");

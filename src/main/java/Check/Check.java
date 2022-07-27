@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 public class Check {
 
+    // for check user information
     public static String checkUserInformation(String input, String regex) {
         if (Objects.equals(regex, "")) {
             if ((input.length() < 3 || input.length() > 10) || Character.isDigit(input.charAt(0))) {
@@ -32,6 +33,7 @@ public class Check {
         }
     }
 
+    // for check enter yes and no
     public static void checkPublished(String input) {
         while (true) {
             if (!Objects.equals(input, "yes") && !Objects.equals(input, "no")) {
@@ -43,6 +45,7 @@ public class Check {
         }
     }
 
+    // for check valid integer
     public static String checkInteger(String input, String regex) {
         if (Objects.equals(input, "exit") || Objects.equals(input, "0"))
             return input;
@@ -64,7 +67,6 @@ public class Check {
     }
 
     public static void main(String[] args) {
-
     }
 
 }

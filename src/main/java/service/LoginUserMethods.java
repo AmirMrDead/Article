@@ -118,6 +118,7 @@ public class LoginUserMethods {
         pressEnter();
     }
 
+    // extract delete method in edit
     private static void selectDeleteArticle(User user) throws SQLException {
         while(true){
             if(showAllUserArticles(user,"Enter the id of the article you want to delete (Enter exit for exit):"))
@@ -135,6 +136,7 @@ public class LoginUserMethods {
         }
     }
 
+    // extract publish method in edit
     private static void selectPublishedArticle(User user) throws SQLException {
         String command;
         while (true) {
@@ -163,6 +165,7 @@ public class LoginUserMethods {
         }
     }
 
+    // extract edit method in edit
     private static void selectEditArticle(User user) throws SQLException {
         String command;
         while (true) {

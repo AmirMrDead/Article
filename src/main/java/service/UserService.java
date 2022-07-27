@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 public class UserService {
 
+    // to add and save user
     public void save(User user) throws SQLException {
         ResultSet resultSet = ApplicationObjects.getUserRepository().load(user);
         if (!resultSet.next()) {
@@ -16,6 +17,7 @@ public class UserService {
         resultSet.close();
     }
 
+    // to login and set id for user
     public boolean login(User user) throws SQLException {
         ResultSet resultSet = ApplicationObjects.getUserRepository().load(user);
         if (resultSet.next()) {
@@ -27,6 +29,7 @@ public class UserService {
         return false;
     }
 
+    // to load all articles for one user
     public Article[] load(User user) throws SQLException {
         ResultSet resultSet = ApplicationObjects.getArticleRepository().loadAllArticle(user.getId());
         Article[] articles = new Article[1000];
@@ -44,6 +47,7 @@ public class UserService {
         return articles;
     }
 
+    // to load all published articles for guess
     public Article[] load() throws SQLException {
         ResultSet resultSet = ApplicationObjects.getArticleRepository().loadAllArticle();
         Article[] articles = new Article[1000];
@@ -58,6 +62,7 @@ public class UserService {
         return articles;
     }
 
+    // to load one article for user
     public Article load(int id, User user) throws SQLException {
         ResultSet resultSet = ApplicationObjects.getArticleRepository().loadOneArticleForUser(id);
         Article article = new Article();
@@ -71,6 +76,7 @@ public class UserService {
         }
     }
 
+    // to load article
     public Article load(int id) throws SQLException {
         ResultSet resultSet = ApplicationObjects.getArticleRepository().loadOneArticleForGuess(id);
         Article article = new Article();
@@ -84,10 +90,12 @@ public class UserService {
         }
     }
 
+    // to edit published or unpublished
     public void edit(boolean isPublished, int id, User user) throws SQLException {
         ApplicationObjects.getArticleRepository().edit(isPublished, id);
     }
 
+    // to edit article
     public void edit(Article article, int id, User user) throws SQLException {
         ApplicationObjects.getArticleRepository().edit(article, id);
     }
@@ -115,16 +123,6 @@ public class UserService {
         }
     }
 
-    private void getArticle(ResultSet resultSet, Article article) throws SQLException {
-        article.setId(resultSet.getInt("id"));
-        article.setTitle(resultSet.getString("title"));
-        article.setBrief(resultSet.getString("brief"));
-        article.setContent(resultSet.getString("content"));
-        article.setCreateDate(resultSet.getDate("create_date"));
-        article.setIsPublished(resultSet.getBoolean("is_published"));
-        article.setUserId(resultSet.getInt("user_id"));
-    }
-
     public boolean deleteOneArticle(User user, int id) throws SQLException{
         ResultSet resultSet = ApplicationObjects.getArticleRepository().loadOneArticleForUser(id);
         if (resultSet.next() && user.getId() == resultSet.getInt("user_id")) {
@@ -143,6 +141,17 @@ public class UserService {
 
     public void deleteAllArticle(User user) throws SQLException{
             ApplicationObjects.getArticleRepository().deleteAll(user.getId());
+    }
+
+    // set article
+    private void getArticle(ResultSet resultSet, Article article) throws SQLException {
+        article.setId(resultSet.getInt("id"));
+        article.setTitle(resultSet.getString("title"));
+        article.setBrief(resultSet.getString("brief"));
+        article.setContent(resultSet.getString("content"));
+        article.setCreateDate(resultSet.getDate("create_date"));
+        article.setIsPublished(resultSet.getBoolean("is_published"));
+        article.setUserId(resultSet.getInt("user_id"));
     }
 
 }
