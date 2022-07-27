@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class GuessMethods {
 
-    public void signUp() throws SQLException {
+    public static void signUp() throws SQLException {
         User user = new User();
         String password;
         System.out.print("Enter username: ");
@@ -22,12 +22,12 @@ public class GuessMethods {
         user.setBirthday(ApplicationObjects.getScanner().next());
         if (!ApplicationObjects.getUserService().checkUserExist(user)) {
             ApplicationObjects.getUserService().save(user);
-            System.out.println("done successfully");
+            System.out.println("Done successfully");
             System.out.println("Press enter to continue");
             pressEnter();
             ShowMenuForLoginUser.showMenuForUser(user);
         } else {
-            System.out.println("this user exists. try login or signup with new national code and username");
+            System.out.println("This user exists. try login or signup with new national code and username");
             System.out.println("Press enter to continue");
             pressEnter();
         }
