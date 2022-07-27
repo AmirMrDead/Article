@@ -7,7 +7,9 @@ import java.util.Objects;
 
 public class ShowMenuForLoginUser {
 
-    private ShowMenuForLoginUser(){}
+    private ShowMenuForLoginUser() {
+    }
+
     public static void showMenuForUser(User user) throws SQLException {
         String command;
         while (true) {

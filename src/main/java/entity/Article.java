@@ -68,12 +68,12 @@ public class Article {
         this.brief = brief;
     }
 
-    public String showSummary(){
+    public String showSummary() {
         return "id: " + id + " title: " + title;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "id: " + id + " title: " + title + " brief: " + brief + " content: "
                 + content + " createDate: " + createDate + " isPublished: " + isPublished + " userId: " + userId;
     }

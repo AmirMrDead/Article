@@ -41,7 +41,7 @@ public class ArticleRepository {
                 where user_id = ?          
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
-        preparedStatement.setInt(1,id);
+        preparedStatement.setInt(1, id);
         return preparedStatement.executeQuery();
     }
 
@@ -51,7 +51,7 @@ public class ArticleRepository {
                 where id = ?          
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
-        preparedStatement.setInt(1,id);
+        preparedStatement.setInt(1, id);
         return preparedStatement.executeQuery();
     }
 
@@ -61,7 +61,7 @@ public class ArticleRepository {
                 where id = ? and is_published = true;       
                 """;
         PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
-        preparedStatement.setInt(1,id);
+        preparedStatement.setInt(1, id);
         return preparedStatement.executeQuery();
     }
 

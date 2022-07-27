@@ -71,16 +71,16 @@ public class LoginUserMethods {
                         showOneUserArticle(article);
                         command = ApplicationObjects.getScanner().next();
                         if (Objects.equals(command, "title")) {
-                            updateArticle(user, id, article,"title");
+                            updateArticle(user, id, article, "title");
                             pressEnter();
                         } else if (Objects.equals(command, "brief")) {
-                            updateArticle(user, id, article,"brief");
+                            updateArticle(user, id, article, "brief");
                             pressEnter();
                         } else if (Objects.equals(command, "content")) {
-                            updateArticle(user, id, article,"content");
+                            updateArticle(user, id, article, "content");
                             pressEnter();
                         } else if (Objects.equals(command, "isPublished")) {
-                            updateArticle(user, id, article,"isPublished");
+                            updateArticle(user, id, article, "isPublished");
                             pressEnter();
                         } else if (Objects.equals(command, "exit")) {
                             break;
@@ -129,13 +129,13 @@ public class LoginUserMethods {
     private static void updateArticle(User user, int id, Article article, String command) throws SQLException {
         System.out.print("Enter new " + command + " : ");
         ApplicationObjects.getScanner().nextLine();
-        if(Objects.equals(command, "title"))
+        if (Objects.equals(command, "title"))
             article.setTitle(ApplicationObjects.getScanner().nextLine());
-        else if(Objects.equals(command, "content"))
+        else if (Objects.equals(command, "content"))
             article.setContent(ApplicationObjects.getScanner().nextLine());
-        else if(Objects.equals(command, "brief"))
+        else if (Objects.equals(command, "brief"))
             article.setBrief(ApplicationObjects.getScanner().nextLine());
-        else if(Objects.equals(command, "isPublished")){
+        else if (Objects.equals(command, "isPublished")) {
             String temp = ApplicationObjects.getScanner().nextLine();
             if (Objects.equals(temp, "true"))
                 article.setIsPublished(true);

@@ -9,7 +9,9 @@ import java.util.Objects;
 
 public class GuessMethods {
 
-    private GuessMethods(){}
+    private GuessMethods() {
+    }
+
     public static void signUp() throws SQLException {
         User user = new User();
         String password;
@@ -61,7 +63,7 @@ public class GuessMethods {
             System.out.println("Press enter to continue");
             pressEnter();
         } else {
-            while(true){
+            while (true) {
                 int id;
                 for (Article article : articles) {
                     if (article != null)
@@ -71,7 +73,7 @@ public class GuessMethods {
                 System.out.println("This is a summary of our published articles");
                 System.out.println("Enter the id of the article you want to see in detail (Enter 0 for exit)");
                 id = Integer.parseInt(ApplicationObjects.getScanner().next());
-                if(id == 0)
+                if (id == 0)
                     break;
                 Article article = ApplicationObjects.getUserService().load(id);
                 if (article == null) {

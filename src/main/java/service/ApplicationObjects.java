@@ -28,5 +28,6 @@ public class ApplicationObjects {
         return articleRepository;
     }
 
-    private ApplicationObjects(){}
+    private ApplicationObjects() {
+    }
 }
