@@ -69,7 +69,7 @@ public class Article {
     }
 
     public String showSummary() {
-        return "id: " + id + " title: " + title;
+        return "id: " + id + " title: " + title + " brief: " + brief;
     }
 
     @Override
