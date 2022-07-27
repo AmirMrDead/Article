@@ -107,6 +107,16 @@ public class UserService {
         return resultSet.next();
     }
 
+    public String forgotPassword(String username, String nationalCode,String birthday) throws SQLException {
+        ResultSet resultSet = ApplicationObjects.getUserRepository().load(username,nationalCode,birthday);
+        if(resultSet.next()){
+            return resultSet.getString("password");
+        }
+        else{
+            return null;
+        }
+    }
+
     private void getArticle(ResultSet resultSet, Article article) throws SQLException {
         article.setId(resultSet.getInt("id"));
         article.setTitle(resultSet.getString("title"));

@@ -33,6 +33,17 @@ public class UserRepository {
 
     }
 
+    public ResultSet load(String username, String nationalCode, String birthday) throws SQLException {
+        final String query = """
+                select * from users where username = ? and national_code = ? and birthday = ?;
+                """;
+        PreparedStatement preparedStatement = DBConfig.getConnection().prepareStatement(query);
+        preparedStatement.setString(1, username);
+        preparedStatement.setString(2, nationalCode);
+        preparedStatement.setDate(3, Date.valueOf(birthday));
+        return preparedStatement.executeQuery();
+    }
+
     public ResultSet checkUserExist(User user) throws SQLException {
         final String query = """
                 select * from users where username = ? or national_code = ?;
