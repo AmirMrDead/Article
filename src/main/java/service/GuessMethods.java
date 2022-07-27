@@ -16,7 +16,7 @@ public class GuessMethods {
         User user = new User();
         String password;
         System.out.print("Enter username: ");
-        user.setUsername(ApplicationObjects.getScanner().next());
+        user.setUsername(Check.check(ApplicationObjects.getScanner().next() , ""));
         System.out.print("Enter national code: ");
         password = Check.check(ApplicationObjects.getScanner().next(),"^\\d{10}$");
         user.setNationalCode(password);
