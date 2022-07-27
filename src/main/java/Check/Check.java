@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class Check {
 
-    public static String checkDate(String date, String regex){
+    public static String check(String date, String regex){
         if(Pattern.matches(regex,date)){
             return date;
         }
