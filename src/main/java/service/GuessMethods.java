@@ -25,7 +25,8 @@ public class GuessMethods {
         user.setBirthday(ApplicationObjects.getScanner().next());
         if (!ApplicationObjects.getUserService().checkUserExist(user)) {
             ApplicationObjects.getUserService().save(user);
-            System.out.println("Done successfully");
+            ApplicationObjects.getUserService().login(user);
+            System.out.println("Registration was successful");
             System.out.println("Press enter to continue");
             pressEnter();
             ShowMenuForLoginUser.showMenuForUser(user);

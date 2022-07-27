@@ -20,7 +20,7 @@ public class ShowMenuForLoginUser {
             System.out.println("5) logout");
             command = ApplicationObjects.getScanner().next();
             if (Objects.equals(command, "1")) {
-                LoginUserMethods.showAllArticles(user);
+                onePossibleArticle(user);
             } else if (Objects.equals(command, "2")) {
                 LoginUserMethods.addArticle(user);
             } else if (Objects.equals(command, "3")) {
@@ -33,4 +33,14 @@ public class ShowMenuForLoginUser {
         }
     }
 
+    private static void onePossibleArticle(User user) throws SQLException {
+        if(LoginUserMethods.showAllArticles(user)){
+            System.out.println("these are your articles");
+            System.out.println("Press enter to continue");
+            try {
+                System.in.read();
+            } catch (Exception ignored) {
+            }
+        }
+    }
 }

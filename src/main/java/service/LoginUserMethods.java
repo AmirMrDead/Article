@@ -13,24 +13,27 @@ public class LoginUserMethods {
     private LoginUserMethods() {
     }
 
-    public static void showAllArticles(User user) throws SQLException {
+    public static boolean showAllArticles(User user) throws SQLException {
         Article[] articles;
         articles = Arrays.copyOf(ApplicationObjects.getUserService().load(user), 1000);
-        if (articles[0].getId() == 0) {
+        if (articles[0] == null) {
             System.out.println("You have no article");
             pressEnter();
+            return false;
         } else {
             for (Article article : articles) {
                 if (article != null)
                     System.out.println(article);
                 else break;
             }
-            pressEnter();
+//            pressEnter();
+            return true;
         }
     }
 
     public static void addArticle(User user) throws SQLException {
         Article article = new Article();
+        System.out.println(user.getId());
         System.out.println("Enter title: ");
         ApplicationObjects.getScanner().nextLine();
         article.setTitle(ApplicationObjects.getScanner().nextLine());
@@ -55,7 +58,8 @@ public class LoginUserMethods {
             command = ApplicationObjects.getScanner().next();
             if (Objects.equals(command, "1")) {
                 while (true) {
-                    showAllUserArticles(user, "Enter the id of the article you want to edit (Enter exit for exit): ");
+                    if(!showAllUserArticles(user, "Enter the id of the article you want to edit (Enter exit for exit): "))
+                        break;
                     command = ApplicationObjects.getScanner().next();
                     if (Objects.equals(command, "exit"))
                         break;
@@ -91,7 +95,8 @@ public class LoginUserMethods {
                 }
             } else if (Objects.equals(command, "2")) {
                 while (true) {
-                    showAllUserArticles(user, "Enter the id of the article you want to published or unpublished (Enter exit for exit): ");
+                    if(!showAllUserArticles(user, "Enter the id of the article you want to published or unpublished (Enter exit for exit): "))
+                        break;
                     command = ApplicationObjects.getScanner().next();
                     if (Objects.equals(command, "exit"))
                         break;
@@ -137,9 +142,9 @@ public class LoginUserMethods {
             article.setBrief(ApplicationObjects.getScanner().nextLine());
         else if (Objects.equals(command, "isPublished")) {
             String temp = ApplicationObjects.getScanner().nextLine();
-            if (Objects.equals(temp, "true"))
+            if (Objects.equals(temp, "yes"))
                 article.setIsPublished(true);
-            else if (Objects.equals(temp, "false"))
+            else if (Objects.equals(temp, "no"))
                 article.setIsPublished(false);
         }
         ApplicationObjects.getUserService().edit(article, id, user);
@@ -152,10 +157,12 @@ public class LoginUserMethods {
         System.out.println("Which part do you want to change? (Enter exit for exit)");
     }
 
-    private static void showAllUserArticles(User user, String x) throws SQLException {
-        showAllArticles(user);
-        System.out.println("These are your articles");
-        System.out.println(x);
+    private static boolean showAllUserArticles(User user, String x) throws SQLException {
+        if(showAllArticles(user)){
+            System.out.println("These are your articles");
+            System.out.println(x);
+            return true;
+        }else return false;
     }
 
     public static void changePassword(User user) throws SQLException {
