@@ -7,24 +7,24 @@ import java.util.Scanner;
 
 public class ApplicationObjects {
 
-    private final Scanner scanner = new Scanner(System.in);
-    private final UserService userService = new UserService();
-    private final UserRepository userRepository = new UserRepository();
-    private final ArticleRepository articleRepository = new ArticleRepository();
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final UserService userService = new UserService();
+    private static final UserRepository userRepository = new UserRepository();
+    private static final ArticleRepository articleRepository = new ArticleRepository();
 
-    public Scanner getScanner() {
+    public static Scanner getScanner() {
         return scanner;
     }
 
-    public UserService getUserService() {
+    public static UserService getUserService() {
         return userService;
     }
 
-    public UserRepository getUserRepository() {
+    public static UserRepository getUserRepository() {
         return userRepository;
     }
 
-    public ArticleRepository getArticleRepository() {
+    public static ArticleRepository getArticleRepository() {
         return articleRepository;
     }
 }
